@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <span class="eyebrow reveal">About BillionBlogs</span>
+    <h1 class="reveal" style="max-width:16ch;">Financial journalism built to be understood, not skimmed.</h1>
+    <p class="reveal">We started BillionBlogs because most financial content is written to sell something. Ours is written to explain something.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container two-col">
+    <div class="prose reveal" style="max-width:64ch;">
+      <p style="font-size:19px; color:var(--ink-soft); margin-bottom:24px;">BillionBlogs is an independent publication covering personal finance, investing, income, and the economics that shape everyday decisions. We report on the mechanics of money — how budgets actually behave, why smart people still make bad financial calls, what a rate change means for a mortgage — without the affiliate-link incentives that distort so much of the category.</p>
+      <p>Every piece runs through the same filter: would this help a reader make one better decision this month? If not, it doesn't publish. That standard means fewer articles and slower output than most finance sites — a trade we make deliberately.</p>
+      <h2 style="margin-top:48px;">How we work</h2>
+      <p>Our editorial team writes from primary sources — Federal Reserve data, SEC filings, academic research — and discloses assumptions rather than hiding them behind confident language. We do not accept payment for coverage, and we mark sponsored content clearly when it appears.</p>
+      <h2 style="margin-top:48px;">What we're not</h2>
+      <p>We're not a robo-advisor, a brokerage, or a substitute for a licensed financial planner. Nothing on BillionBlogs is personalized financial advice — it's context, so you can ask your advisor, or yourself, better questions.</p>
+    </div>
+    <div>
+      <div class="sidebar-card reveal">
+        <h4>Founded</h4>
+        <p style="color:var(--ink-soft); font-size:14px;">2024, as an independent digital publication.</p>
+      </div>
+      <div class="sidebar-card reveal">
+        <h4>Editorial team</h4>
+        <p style="color:var(--ink-soft); font-size:14px;">2 staff writers, growing.</p>
+      </div>
+      <div class="sidebar-card reveal">
+        <h4>Corrections</h4>
+        <p style="color:var(--ink-soft); font-size:14px;">We correct errors publicly. Reach the editorial team via the contact page.</p>
+      </div>
+      <a href="{{ base }}contact.html" class="btn btn-primary reveal" style="width:100%; justify-content:center;">Get in touch</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

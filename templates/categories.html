@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <span class="eyebrow reveal">Sections</span>
+    <h1 class="reveal">Every category, one clear map.</h1>
+    <p class="reveal">Nine beats, covered with the same rigor: budgeting, investing, income, psychology, and the economics that shape all three.</p>
+  </div>
+</div>
+<section class="section">
+  <div class="container grid grid-3">
+    {% for cat in categories %}
+    <a href="{{ base }}category/{{ cat.slug }}.html" class="card reveal" style="overflow:hidden;">
+      <div class="card-media" style="aspect-ratio:16/10;"><img src="{{ base }}assets/img/covers/{{ cat.cover }}" alt="{{ cat.name }}" loading="lazy"></div>
+      <div class="card-body">
+        <span class="index-num">{{ '%02d'|format(loop.index) }}</span>
+        <h3 class="card-title" style="margin-top:14px;">{{ cat.name }}</h3>
+        <p class="card-dek">{{ cat.desc }}</p>
+        <div class="card-foot"><span>{{ cat.count }} stories</span></div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

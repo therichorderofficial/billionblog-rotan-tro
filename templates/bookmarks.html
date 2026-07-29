@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <span class="eyebrow reveal">Your Library</span>
+    <h1 class="reveal">Bookmarks</h1>
+    <p class="reveal">Saved articles live in your browser only — nothing is sent to a server.</p>
+  </div>
+</div>
+<section class="section">
+  <div class="container">
+    <div class="grid grid-3" id="bookmark-grid"></div>
+    <div id="bookmark-empty" style="display:none; text-align:center; padding:60px 0;">
+      <p style="color:var(--ink-soft); margin-bottom:20px;">No bookmarks yet. Tap the bookmark icon on any article to save it here.</p>
+      <a href="{{ base }}articles.html" class="btn btn-primary">Browse articles</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block extra_js %}
+<script>
+(function(){
+  var key = 'bb-bookmarks';
+  var list = [];
+  try{ list = JSON.parse(localStorage.getItem(key) || '[]'); }catch(e){}
+  var grid = document.getElementById('bookmark-grid');
+  var empty = document.getElementById('bookmark-empty');
+  var items = (window.BB_ARTICLES || []).filter(function(a){ return list.indexOf(a.slug) > -1; });
+  if(!items.length){ empty.style.display = 'block'; return; }
+  grid.innerHTML = items.map(function(a){
+    return '<a href="' + a.url + '" class="card reveal in">' +
+      '<div class="card-media"><img src="' + a.cover + '" alt="' + a.title + '" loading="lazy"></div>' +
+      '<div class="card-body"><span class="card-cat">' + a.category + '</span>' +
+      '<h3 class="card-title">' + a.title + '</h3></div></a>';
+  }).join('');
+})();
+</script>
+{% endblock %}

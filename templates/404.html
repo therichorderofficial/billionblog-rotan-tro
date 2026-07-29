@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="section" style="min-height:60vh; display:flex; align-items:center;">
+  <div class="container" style="text-align:center;">
+    <span class="eyebrow reveal">404</span>
+    <h1 class="reveal" style="font-size:clamp(40px,7vw,88px); margin:16px 0;">This page moved markets.</h1>
+    <p class="reveal" style="color:var(--ink-soft); max-width:48ch; margin:0 auto 32px;">We can't find the page you're looking for. It may have been renamed, retired, or never existed in the first place.</p>
+    <div class="reveal" style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+      <a href="{{ base }}index.html" class="btn btn-primary">Back to home</a>
+      <button class="btn btn-ghost" data-search-open>Search articles</button>
+    </div>
+  </div>
+</section>
+{% endblock %}

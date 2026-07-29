@@ -1,0 +1,148 @@
+backend:
+  name: git-gateway
+  branch: main
+  repo: ""  # Will be auto-detected by Netlify
+  auth_type: github
+  open_authoring: false
+
+# Fallback media location for any image not covered by a field-specific folder below.
+media_folder: "assets/img/uploads"
+public_folder: "/assets/img/uploads"
+
+# Publishing configuration
+publish_mode: editorial_workflow  # Enable editorial workflow for better control
+site_url: ""  # Will be auto-filled by Netlify environment
+display_url: ""  # Will be auto-filled by Netlify environment
+logo_url: "assets/img/logo-dark.png"
+
+# Internationalization
+locale: "en"
+i18n:
+  structure: single_file
+  locales: [en]
+  default_locale: en
+
+collections:
+  - name: "articles"
+    label: "Articles"
+    label_singular: "Article"
+    folder: "content/articles"
+    create: true
+    delete: true
+    slug: "{{fields.slug}}"
+    summary: "{{title}} — {{category}} — {{publish_date}}"
+    sortable_fields: ["publish_date", "title", "category"]
+    preview_path: "article/{{slug}}.html"
+    editor:
+      preview: false  # Disable preview for now, can be enabled later with custom preview
+    view_filters:
+      - label: "Featured"
+        field: featured
+        pattern: true
+      - label: "Trending"
+        field: trending
+        pattern: true
+      - label: "Editor's Picks"
+        field: editors_pick
+        pattern: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "URL Slug", name: "slug", widget: "string", hint: "Lowercase, hyphens only, no spaces. Changing this after publishing breaks the article's existing URL — avoid editing once live." }
+      - { label: "SEO Title (browser tab / Google)", name: "meta_title", widget: "string" }
+      - { label: "SEO / Preview Description", name: "meta_description", widget: "text" }
+      - label: "Category"
+        name: "category"
+        widget: "relation"
+        collection: "categories"
+        value_field: "{{name}}"
+        search_fields: ["name"]
+        display_fields: ["name"]
+      - label: "Author"
+        name: "author"
+        widget: "relation"
+        collection: "authors"
+        value_field: "{{name}}"
+        search_fields: ["name"]
+        display_fields: ["name"]
+      - { label: "Publish Date", name: "publish_date", widget: "datetime", format: "MMMM D, YYYY", date_format: "MMMM D, YYYY", time_format: false }
+      - { label: "Reading Time", name: "reading_time", widget: "string", default: "5 min", hint: "e.g. \"5 min\" — shown next to the byline." }
+      - label: "Cover Image"
+        name: "cover"
+        widget: "image"
+        required: false
+        media_folder: "/assets/img/covers"
+        public_folder: "/assets/img/covers"
+        hint: "If left empty, a generated placeholder graphic is used automatically."
+      - { label: "Show as homepage lead story", name: "featured", widget: "boolean", default: false, hint: "Only one article should be featured at a time — the most recently-flagged one wins." }
+      - { label: "Show in \"Trending this week\"", name: "trending", widget: "boolean", default: false }
+      - { label: "Show in \"Editor's Picks\"", name: "editors_pick", widget: "boolean", default: false }
+      - { label: "Show in \"Most Popular\"", name: "popular", widget: "boolean", default: false }
+      - { label: "Introduction", name: "intro", widget: "text", hint: "Opens the article, shown large under the title." }
+      - label: "Body Sections"
+        name: "sections"
+        widget: "list"
+        summary: "{{fields.title}}"
+        fields:
+          - { label: "Section Heading", name: "title", widget: "string" }
+          - { label: "Section Content", name: "content", widget: "text" }
+      - label: "Key Takeaways"
+        name: "key_takeaways"
+        widget: "list"
+        allow_add: true
+        summary: "{{fields}}"
+      - label: "FAQs"
+        name: "faqs"
+        widget: "list"
+        summary: "{{fields.q}}"
+        fields:
+          - { label: "Question", name: "q", widget: "string" }
+          - { label: "Answer", name: "a", widget: "text" }
+      - { label: "Conclusion", name: "conclusion", widget: "text" }
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        allow_add: true
+
+  - name: "categories"
+    label: "Categories"
+    label_singular: "Category"
+    folder: "content/categories"
+    create: true
+    delete: false
+    slug: "{{fields.slug}}"
+    summary: "{{name}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "URL Slug", name: "slug", widget: "string", hint: "Lowercase, hyphens only. Avoid changing after articles are assigned to this category." }
+      - { label: "Description", name: "description", widget: "text" }
+      - label: "Banner Image"
+        name: "cover"
+        widget: "image"
+        required: false
+        media_folder: "/assets/img/covers"
+        public_folder: "/assets/img/covers"
+
+  - name: "authors"
+    label: "Authors"
+    label_singular: "Author"
+    folder: "content/authors"
+    create: true
+    delete: false
+    slug: "{{fields.slug}}"
+    summary: "{{name}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "URL Slug", name: "slug", widget: "string" }
+      - { label: "Title / Role", name: "title", widget: "string" }
+      - { label: "Short Bio (used on article bylines)", name: "bio", widget: "string" }
+      - { label: "Full Bio (author profile page)", name: "bio_long", widget: "text" }
+      - label: "Areas of Expertise"
+        name: "expertise"
+        widget: "list"
+        allow_add: true
+      - label: "Photo"
+        name: "photo"
+        widget: "image"
+        required: false
+        media_folder: "/assets/img/authors"
+        public_folder: "/assets/img/authors"

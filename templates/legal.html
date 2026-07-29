@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <span class="eyebrow reveal">Legal</span>
+    <h1 class="reveal">{{ heading }}</h1>
+    <p class="reveal">Last updated July 1, 2026.</p>
+  </div>
+</div>
+<section class="section">
+  <div class="container prose" style="max-width:74ch;">
+    {{ body|safe }}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,135 @@
+/* Custom styles for Decap CMS mobile responsiveness */
+/* This CSS is loaded by the admin panel to improve mobile experience */
+
+:root {
+  --nc-primary: #1B4D3E;
+  --nc-bg: #F8F8F6;
+  --nc-text: #111111;
+}
+
+/* Ensure admin panel is fully responsive */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#nc-root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mobile-friendly adjustments for the editor */
+@media (max-width: 768px) {
+  /* Reduce padding on mobile */
+  [class*="Layout__MainNav"],
+  [class*="NavBar__NavBarContainer"] {
+    position: relative !important;
+    width: 100% !important;
+  }
+
+  /* Make collection list full width on mobile */
+  [class*="CollectionView__View"],
+  [class*="EditorUI__EditorContainer"] {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Improve text input sizes for mobile */
+  input[type="text"],
+  input[type="email"],
+  input[type="url"],
+  textarea,
+  select {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    padding: 12px !important;
+    min-height: 44px !important; /* Touch-friendly size */
+  }
+
+  /* Make buttons touch-friendly */
+  button {
+    min-height: 44px !important;
+    padding: 12px 16px !important;
+  }
+
+  /* Better sidebar behavior on mobile */
+  [class*="SidebarLayout__CollectionsPanel"] {
+    position: absolute;
+    left: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100%;
+    transition: left 0.3s ease;
+    z-index: 1000;
+    background: var(--nc-bg);
+  }
+
+  [class*="SidebarLayout__CollectionsPanel"].open {
+    left: 0;
+  }
+
+  /* Responsive grid for admin forms */
+  [class*="EditorWidgets__WidgetGrid"] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Make preview panels stack on mobile */
+  [class*="EditorPreviewPane"],
+  [class*="EditorInterface"] {
+    display: block !important;
+    width: 100% !important;
+  }
+}
+
+/* Touch-friendly spacing */
+@media (hover: none) and (pointer: coarse) {
+  /* Increase touch targets on mobile */
+  button,
+  a,
+  [role="button"] {
+    min-height: 48px !important;
+    min-width: 48px !important;
+    padding: 12px 16px !important;
+  }
+
+  /* Better spacing for list items */
+  [class*="CollectionList__Item"] {
+    padding: 16px !important;
+    min-height: 60px !important;
+  }
+
+  /* Improve form label visibility */
+  label {
+    font-size: 16px !important;
+    margin-bottom: 8px !important;
+  }
+}
+
+/* Dark mode support (if implemented) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --nc-bg: #101211;
+    --nc-text: #F3F3F0;
+  }
+}
+
+/* Landscape mode optimizations */
+@media (max-height: 600px) and (orientation: landscape) {
+  /* Reduce vertical spacing for landscape mobile */
+  [class*="EditorUI__EditorContainer"] {
+    max-height: calc(100vh - 50px);
+    overflow-y: auto;
+  }
+
+  /* Compact button sizes for landscape */
+  button {
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+  }
+}

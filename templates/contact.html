@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <span class="eyebrow reveal">Contact</span>
+    <h1 class="reveal">Talk to the editorial team.</h1>
+    <p class="reveal">Tips, corrections, partnership questions, or just a thought on a story — we read everything that comes in.</p>
+  </div>
+</div>
+<section class="section">
+  <div class="container two-col">
+    <form class="reveal" style="display:flex; flex-direction:column; gap:18px; max-width:560px;" onsubmit="event.preventDefault(); this.querySelector('.contact-success').style.display='block'; this.querySelector('button').style.display='none';">
+      <div>
+        <label style="font-size:13px; font-weight:600; display:block; margin-bottom:8px;">Name</label>
+        <input required type="text" style="width:100%; padding:14px 16px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--card); color:var(--ink); font-size:14px;">
+      </div>
+      <div>
+        <label style="font-size:13px; font-weight:600; display:block; margin-bottom:8px;">Email</label>
+        <input required type="email" style="width:100%; padding:14px 16px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--card); color:var(--ink); font-size:14px;">
+      </div>
+      <div>
+        <label style="font-size:13px; font-weight:600; display:block; margin-bottom:8px;">What's this about?</label>
+        <select style="width:100%; padding:14px 16px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--card); color:var(--ink); font-size:14px;">
+          <option>Story tip</option>
+          <option>Correction</option>
+          <option>Partnership</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:13px; font-weight:600; display:block; margin-bottom:8px;">Message</label>
+        <textarea required rows="5" style="width:100%; padding:14px 16px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--card); color:var(--ink); font-size:14px; resize:vertical;"></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit" style="align-self:flex-start;">Send message</button>
+      <p class="contact-success" style="display:none; color:var(--accent); font-weight:600; font-size:14px;">Thanks — we'll be in touch within two business days.</p>
+    </form>
+    <div>
+      <div class="sidebar-card reveal"><h4>Editorial tips</h4><p style="color:var(--ink-soft); font-size:14px;">editorial@billionblogs.com</p></div>
+      <div class="sidebar-card reveal"><h4>Partnerships</h4><p style="color:var(--ink-soft); font-size:14px;">partners@billionblogs.com</p></div>
+      <div class="sidebar-card reveal"><h4>Response time</h4><p style="color:var(--ink-soft); font-size:14px;">1–2 business days for most inquiries.</p></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <div class="container" style="display:flex; align-items:center; gap:26px;">
+    <img class="avatar reveal" src="{{ base }}assets/img/authors/{{ auth.photo }}" alt="{{ auth.name }}" style="width:88px; height:88px; border-radius:50%; object-fit:cover; flex:0 0 auto;">
+    <div>
+      <span class="eyebrow reveal">Author</span>
+      <h1 class="reveal" style="font-size:clamp(28px,4vw,42px);">{{ auth.name }}</h1>
+      <p class="reveal">{{ auth.title }} · {{ auth.count }} published articles</p>
+    </div>
+  </div>
+</div>
+<section class="section-tight">
+  <div class="container">
+    <p class="reveal" style="max-width:70ch; font-size:17px; color:var(--ink-soft); line-height:1.8;">{{ auth.bio_long }}</p>
+    <div class="chip-row reveal" style="margin-top:24px;">
+      {% for e in auth.expertise %}<span class="chip">{{ e }}</span>{% endfor %}
+    </div>
+    <div class="share-row reveal" style="margin-top:24px;">
+      <a href="#" class="icon-btn" aria-label="X / Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-7-6.3 7H1.3l8.1-9.3L1 2h7.2l5 6.6L18.9 2z"/></svg></a>
+      <a href="#" class="icon-btn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2 3.77-2 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3-.02-2.96-1.8-2.96-1.82 0-2.1 1.4-2.1 2.86V21H9z"/></svg></a>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal"><div><h2>Articles by {{ auth.name.split(' ')[0] }}</h2></div></div>
+    <div class="grid grid-3">
+      {% for a in auth.articles %}
+      <a href="{{ base }}article/{{ a.slug }}.html" class="card reveal">
+        <div class="card-media"><img src="{{ base }}assets/img/covers/{{ a.cover }}" alt="{{ a.title }}" loading="lazy"></div>
+        <div class="card-body">
+          <span class="card-cat">{{ a.category }}</span>
+          <h3 class="card-title">{{ a.title }}</h3>
+          <div class="card-foot"><span>{{ a.publish_date }}</span><span class="dot"></span><span>{{ a.reading_time }} read</span></div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

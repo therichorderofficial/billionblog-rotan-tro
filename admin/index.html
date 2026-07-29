@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>BillionBlogs — Admin</title>
+  <!-- Netlify Identity widget: powers the login gate for this admin panel -->
+  <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <!-- Custom styles for mobile responsiveness -->
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *{ box-sizing: border-box; }
+    html, body{ margin: 0; padding: 0; height: 100%; }
+    body{ 
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif; 
+      background: #f8f8f6;
+    }
+    #nc-root{ 
+      min-height: 100vh;
+      display: flex;
+    }
+    /* Netlify Identity widget styling for mobile */
+    .netlify-identity-container {
+      width: 100%;
+      max-width: 100%;
+    }
+    @media (max-width: 768px) {
+      body { font-size: 14px; }
+      #nc-root { padding: 0; }
+    }
+    /* Loading state */
+    .admin-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #f8f8f6;
+      font-size: 16px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <!-- Decap CMS (formerly Netlify CMS) -->
+  <div class="admin-loading">Loading admin panel...</div>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // Initialize Netlify Identity and redirect authentication flow
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          // Show login modal for logged-out users
+          window.netlifyIdentity.open();
+        } else {
+          // User is logged in, hide the loading message
+          const loader = document.querySelector('.admin-loading');
+          if (loader) loader.style.display = 'none';
+        }
+      });
+      
+      window.netlifyIdentity.on("login", () => { 
+        // Refresh after login
+        document.location.href = "/admin/"; 
+      });
+      
+      window.netlifyIdentity.on("logout", () => {
+        // Redirect to home after logout
+        document.location.href = "/";
+      });
+      
+      // Handle any authentication errors gracefully
+      window.netlifyIdentity.on("error", err => {
+        console.error("Auth error:", err);
+        alert("Authentication error. Please try again.");
+      });
+    } else {
+      console.warn("Netlify Identity widget not available");
+      setTimeout(() => {
+        const loader = document.querySelector('.admin-loading');
+        if (loader) {
+          loader.innerHTML = "Error: Netlify Identity not available. Make sure you're on a Netlify site with Identity enabled.";
+        }
+      }, 2000);
+    }
+  </script>
+</body>
+</html>

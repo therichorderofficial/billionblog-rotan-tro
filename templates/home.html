@@ -1,0 +1,243 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="photo-hero">
+  <div class="photo-hero-media">
+    <img src="{{ base }}assets/img/hero/hero-skyline.jpg" alt="City skyline">
+  </div>
+  <div class="photo-hero-scrim"></div>
+  <div class="container photo-hero-inner">
+    <span class="eyebrow reveal">Finance, Money &amp; Wealth</span>
+    <h1 class="photo-hero-title reveal">Insight for Investors Who Think in Decades</h1>
+    <p class="photo-hero-dek reveal">Markets, private capital, and the infrastructure reshaping wealth in 2026 — reported clearly, for readers who manage more than a monthly budget.</p>
+
+    <form class="hero-search reveal" action="{{ base }}search.html" method="get">
+      <div class="hero-search-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" name="q" placeholder="Search markets, private credit, AI investing…" autocomplete="off">
+      </div>
+      <button type="submit">Search</button>
+    </form>
+
+    <div class="hero-quicklinks reveal">
+      <a href="{{ base }}category/investing-basics.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/></svg>
+        Investing
+      </a>
+      <a href="{{ base }}category/economics.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/></svg>
+        Economy
+      </a>
+      <a href="{{ base }}category/financial-technology.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+        AI &amp; Finance
+      </a>
+      <a href="{{ base }}category/personal-budgeting.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>
+        Personal Finance
+      </a>
+      <a href="{{ base }}category/income-career.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
+        Income &amp; Career
+      </a>
+    </div>
+
+    <div class="hero-cta-row reveal">
+      <a href="{{ base }}article/{{ featured.slug }}.html" class="btn btn-primary">
+        Read today's lead story
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="{{ base }}articles.html" class="btn btn-ghost">Browse all articles</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">For High-Net-Worth Readers</span>
+        <h2>Market intelligence</h2>
+      </div>
+    </div>
+    <div class="grid grid-3">
+      {% for a in wealth_features %}
+      <a href="{{ base }}article/{{ a.slug }}.html" class="card reveal">
+        <div class="card-media"><img src="{{ base }}assets/img/covers/{{ a.cover }}" alt="{{ a.title }}" loading="lazy"></div>
+        <div class="card-body">
+          <span class="card-cat">{{ a.category }}</span>
+          <h3 class="card-title">{{ a.title }}</h3>
+          <p class="card-dek">{{ a.meta_description }}</p>
+          <div class="card-foot"><span>{{ a.author }}</span><span class="dot"></span><span>{{ a.reading_time }} read</span></div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="chip-row reveal">
+      {% for cat in categories %}
+      <a href="{{ base }}category/{{ cat.slug }}.html" class="chip">{{ cat.name }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Right Now</span>
+        <h2>Trending this week</h2>
+      </div>
+      <a href="{{ base }}trending.html" class="section-link">View all trending
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="grid grid-3">
+      {% for a in trending %}
+      <a href="{{ base }}article/{{ a.slug }}.html" class="card reveal">
+        <div class="card-media"><img src="{{ base }}assets/img/covers/{{ a.cover }}" alt="{{ a.title }}" loading="lazy"></div>
+        <div class="card-body">
+          <span class="card-cat">{{ a.category }}</span>
+          <h3 class="card-title">{{ a.title }}</h3>
+          <p class="card-dek">{{ a.meta_description }}</p>
+          <div class="card-foot"><span>{{ a.author }}</span><span class="dot"></span><span>{{ a.reading_time }} read</span></div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--card); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Curated</span>
+        <h2>Editor's picks</h2>
+      </div>
+      <a href="{{ base }}editors-picks.html" class="section-link">See all picks
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="grid" style="grid-template-columns:1.3fr 1fr; gap:36px;">
+      <a href="{{ base }}article/{{ picks[0].slug }}.html" class="card reveal" style="display:grid; grid-template-columns:1.1fr 1fr;">
+        <div class="card-media" style="aspect-ratio:auto; height:100%;"><img src="{{ base }}assets/img/covers/{{ picks[0].cover }}" alt="{{ picks[0].title }}" loading="lazy"></div>
+        <div class="card-body" style="display:flex; flex-direction:column; justify-content:center;">
+          <span class="card-cat">{{ picks[0].category }}</span>
+          <h3 class="card-title" style="font-size:23px;">{{ picks[0].title }}</h3>
+          <p class="card-dek">{{ picks[0].meta_description }}</p>
+          <div class="card-foot"><span>{{ picks[0].author }}</span><span class="dot"></span><span>{{ picks[0].reading_time }} read</span></div>
+        </div>
+      </a>
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        {% for a in picks[1:4] %}
+        <a href="{{ base }}article/{{ a.slug }}.html" class="card row reveal">
+          <div class="card-media"><img src="{{ base }}assets/img/covers/{{ a.cover }}" alt="{{ a.title }}" loading="lazy"></div>
+          <div class="card-body">
+            <span class="card-cat">{{ a.category }}</span>
+            <h3 class="card-title">{{ a.title }}</h3>
+            <div class="card-foot"><span>{{ a.reading_time }} read</span></div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Fresh</span>
+        <h2>Latest stories</h2>
+      </div>
+      <a href="{{ base }}latest.html" class="section-link">View all latest
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="grid grid-4">
+      {% for a in latest %}
+      <a href="{{ base }}article/{{ a.slug }}.html" class="card reveal">
+        <div class="card-media"><img src="{{ base }}assets/img/covers/{{ a.cover }}" alt="{{ a.title }}" loading="lazy"></div>
+        <div class="card-body">
+          <span class="card-cat">{{ a.category }}</span>
+          <h3 class="card-title" style="font-size:16.5px;">{{ a.title }}</h3>
+          <div class="card-foot"><span>{{ a.reading_time }} read</span></div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--card); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Explore by topic</span>
+        <h2>Market insights, by section</h2>
+      </div>
+    </div>
+    <div class="grid grid-3">
+      {% for cat in categories[:6] %}
+      <a href="{{ base }}category/{{ cat.slug }}.html" class="card reveal" style="padding:28px;">
+        <div class="card-body" style="padding:0;">
+          <span class="index-num">{{ '%02d'|format(loop.index) }}</span>
+          <h3 class="card-title" style="margin-top:16px;">{{ cat.name }}</h3>
+          <p class="card-dek">{{ cat.desc }}</p>
+          <div class="card-foot"><span>{{ cat.count }} stories</span></div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Bylines</span>
+        <h2>Featured authors</h2>
+      </div>
+      <a href="{{ base }}authors.html" class="section-link">All authors
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="grid grid-2">
+      {% for auth in authors %}
+      <a href="{{ base }}author/{{ auth.slug }}.html" class="card reveal" style="display:flex; align-items:center; gap:20px; padding:26px;">
+        <img class="avatar" src="{{ base }}assets/img/authors/{{ auth.photo }}" alt="{{ auth.name }}" style="width:64px; height:64px; border-radius:50%; object-fit:cover; flex:0 0 auto;">
+        <div>
+          <h3 class="card-title" style="margin:0 0 4px;">{{ auth.name }}</h3>
+          <p class="card-dek" style="margin-bottom:8px;">{{ auth.title }}</p>
+          <div class="card-foot"><span>{{ auth.count }} published articles</span></div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="newsletter reveal">
+      <span class="eyebrow" style="color:#5FBE9B;">Weekly Digest</span>
+      <h2>Money moves, decoded every Sunday.</h2>
+      <p>Join 42,000 readers getting one clear, well-reported email on markets, income, and personal finance. No noise, no hype.</p>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed ✓';">
+        <input type="email" required placeholder="you@email.com" aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="newsletter-note">Free forever. Unsubscribe anytime. One email a week.</p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

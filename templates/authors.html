@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <span class="eyebrow reveal">Bylines</span>
+    <h1 class="reveal">The people behind the reporting.</h1>
+    <p class="reveal">A small, deliberately focused editorial team — no ghostwriting, no filler, every byline accountable for what it publishes.</p>
+  </div>
+</div>
+<section class="section">
+  <div class="container grid grid-2">
+    {% for auth in authors %}
+    <a href="{{ base }}author/{{ auth.slug }}.html" class="card reveal" style="padding:32px;">
+      <img class="avatar" src="{{ base }}assets/img/authors/{{ auth.photo }}" alt="{{ auth.name }}" style="width:80px; height:80px; border-radius:50%; object-fit:cover; display:block; margin-bottom:20px;">
+      <h3 class="card-title" style="font-size:22px;">{{ auth.name }}</h3>
+      <p class="card-dek" style="color:var(--accent); font-weight:600; margin-bottom:14px;">{{ auth.title }}</p>
+      <p class="card-dek">{{ auth.bio }}</p>
+      <div class="card-foot" style="margin-top:16px;"><span>{{ auth.count }} published articles</span></div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

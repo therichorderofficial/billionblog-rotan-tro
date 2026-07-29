@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="page-header">
+  <div class="container">
+    {% if breadcrumb %}
+    <div class="breadcrumbs reveal">
+      <a href="{{ base }}index.html">Home</a>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+      <span>{{ breadcrumb }}</span>
+    </div>
+    {% endif %}
+    <span class="eyebrow reveal">{{ eyebrow }}</span>
+    <h1 class="reveal">{{ heading }}</h1>
+    <p class="reveal">{{ subheading }}</p>
+    {% if banner %}
+    <div class="reveal" style="margin-top:32px; border-radius:16px; overflow:hidden; border:1px solid var(--border); aspect-ratio:16/5;">
+      <img src="{{ base }}assets/img/covers/{{ banner }}" alt="{{ heading }}" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    {% if chips %}
+    <div class="chip-row reveal" style="margin-bottom:44px;">
+      {% for c in chips %}
+      <a href="{{ base }}category/{{ c.slug }}.html" class="chip {{ 'active' if c.active else '' }}">{{ c.name }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <div class="grid grid-3">
+      {% for a in items %}
+      <a href="{{ base }}article/{{ a.slug }}.html" class="card reveal">
+        <div class="card-media"><img src="{{ base }}assets/img/covers/{{ a.cover }}" alt="{{ a.title }}" loading="lazy"></div>
+        <div class="card-body">
+          <span class="card-cat">{{ a.category }}</span>
+          <h3 class="card-title">{{ a.title }}</h3>
+          <p class="card-dek">{{ a.meta_description }}</p>
+          <div class="card-foot"><span>{{ a.author }}</span><span class="dot"></span><span>{{ a.reading_time }} read</span></div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+
+    {% if pagination %}
+    <div class="pagination reveal">
+      {% if pagination.prev %}<a href="{{ pagination.prev }}">‹</a>{% else %}<span style="opacity:.3">‹</span>{% endif %}
+      {% for p in pagination.pages %}
+        {% if p.current %}<span class="current">{{ p.n }}</span>{% else %}<a href="{{ p.href }}">{{ p.n }}</a>{% endif %}
+      {% endfor %}
+      {% if pagination.next %}<a href="{{ pagination.next }}">›</a>{% else %}<span style="opacity:.3">›</span>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% if show_newsletter %}
+<section class="section">
+  <div class="container">
+    <div class="newsletter reveal">
+      <span class="eyebrow" style="color:#5FBE9B;">Weekly Digest</span>
+      <h2>Money moves, decoded every Sunday.</h2>
+      <p>Join 42,000 readers getting one clear, well-reported email on markets, income, and personal finance.</p>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed ✓';">
+        <input type="email" required placeholder="you@email.com" aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="newsletter-note">Free forever. Unsubscribe anytime. One email a week.</p>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}

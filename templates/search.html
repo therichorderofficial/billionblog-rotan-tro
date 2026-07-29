@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <span class="eyebrow reveal">Search</span>
+    <h1 class="reveal">Find a story.</h1>
+    <div class="reveal" style="margin-top:24px; max-width:520px; position:relative;">
+      <input id="page-search" type="text" placeholder="Search articles, categories, tags…"
+        style="width:100%; padding:16px 20px; border:1px solid var(--border); border-radius:999px; background:var(--card); color:var(--ink); font-size:15px;">
+    </div>
+  </div>
+</div>
+<section class="section">
+  <div class="container">
+    <div class="grid grid-3" id="search-page-results"></div>
+  </div>
+</section>
+{% endblock %}
+{% block extra_js %}
+<script>
+(function(){
+  var input = document.getElementById('page-search');
+  var grid = document.getElementById('search-page-results');
+  function render(list){
+    grid.innerHTML = list.map(function(a){
+      return '<a href="' + a.url + '" class="card reveal in">' +
+        '<div class="card-media"><img src="' + a.cover + '" alt="' + a.title + '" loading="lazy"></div>' +
+        '<div class="card-body"><span class="card-cat">' + a.category + '</span>' +
+        '<h3 class="card-title">' + a.title + '</h3></div></a>';
+    }).join('') || '<p style="color:var(--ink-soft);">No stories match your search.</p>';
+  }
+  var all = window.BB_ARTICLES || [];
+  function runSearch(q){
+    q = q.trim().toLowerCase();
+    if(!q){ render(all); return; }
+    render(all.filter(function(a){
+      return a.title.toLowerCase().indexOf(q) > -1 || a.category.toLowerCase().indexOf(q) > -1 || a.tags.join(' ').toLowerCase().indexOf(q) > -1;
+    }));
+  }
+  var params = new URLSearchParams(window.location.search);
+  var initialQ = params.get('q') || '';
+  if(initialQ){ input.value = initialQ; }
+  runSearch(initialQ);
+  input.addEventListener('input', function(){ runSearch(input.value); });
+})();
+</script>
+{% endblock %}
